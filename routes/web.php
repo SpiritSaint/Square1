@@ -14,53 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', \App\Http\Controllers\WelcomeController::class);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    $query = \App\Models\Post::query()
-        ->where('user_id', request()->user()->id)
-        ->with('user');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/dashboard', \App\Http\Controllers\DashboardController::class)
+    ->name('dashboard');
 
-    if (request()->has('sort') && in_array(request()->input('sort'), ['asc', 'desc'])) {
-        $query->orderBy('publication_date', request()->input('sort'));
-    } else {
-        $query->orderBy('publication_date', 'desc');
-    }
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/posts/create', \App\Http\Controllers\Posts\CreateController::class)
+    ->name('posts.create');
 
-    $posts = $query->paginate(15);
-    return view('dashboard')->with("posts", $posts);
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->post('/posts', \App\Http\Controllers\Posts\StoreController::class)
+    ->name('posts.store');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/posts/create', function () {
-    return view('posts.create');
-})->name('posts.create');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->get('/posts/{post}/edit', \App\Http\Controllers\Posts\EditController::class)
+    ->name('posts.edit');
 
-Route::middleware(['auth:sanctum', 'verified'])->post('/posts', function () {
-    Post::query()->create([
-        "user_id" => request()->user()->id,
-        "title" => request()->input('title'),
-        "description" => request()->input('description'),
-        "publication_date" => now()
-    ]);
-    return redirect('dashboard')->with("message", __('Post created successfully'));
-})->name('posts.store');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->put('/posts/{post}', \App\Http\Controllers\Posts\UpdateController::class)
+    ->name('posts.update');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/posts/{post}/edit', function (\App\Models\Post $post) {
-    $posts = \App\Models\Post::query()->paginate(15);
-    return view('posts.edit')->with("post", $post);
-})->name('posts.edit');
-
-Route::middleware(['auth:sanctum', 'verified'])->put('/posts/{post}', function (\App\Models\Post $post) {
-    $post->update([
-        "title" => request()->has('title') ? request()->input('title') : $post->title,
-        "description" => request()->has('description') ? request()->input('description') : $post->description,
-    ]);
-    return redirect('dashboard')->with("message", __('Post updated successfully'));
-})->name('posts.update');
-
-Route::middleware(['auth:sanctum', 'verified'])->delete('/posts/{post}', function (\App\Models\Post $post) {
-    $post->delete();
-    return redirect('dashboard')->with("message", __('Post deleted successfully'));
-})->name('posts.destroy');
+Route::middleware(['auth:sanctum', 'verified'])
+    ->delete('/posts/{post}', \App\Http\Controllers\Posts\DestroyController::class)
+    ->name('posts.destroy');
