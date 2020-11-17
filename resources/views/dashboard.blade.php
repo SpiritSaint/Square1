@@ -7,7 +7,7 @@
 
     <div class="py-12">
 
-        @if(session('message'))
+        @if (session('message'))
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
                 <div class="shadow overflow-hidden sm:rounded-md">
                     <div class="px-4 py-5 bg-green-300 sm:p-6">
@@ -26,14 +26,16 @@
                 {{ __('Create') }}
             </a>
 
-            @if (request()->input('sort') == 'asc')
-                <a href="{{ route('dashboard') }}?sort=desc" class="inline-flex items-center px-4 py-2 mr-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                    {{ __('Sort desc') }}
-                </a>
-            @elseif (request()->input('sort') == 'desc' || !request()->has('sort'))
-                <a href="{{ route('dashboard') }}?sort=asc" class="inline-flex items-center px-4 py-2 mr-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                    {{ __('Sort asc') }}
-                </a>
+            @if (!$posts->isEmpty())
+                @if (request()->input('sort') == 'asc')
+                    <a href="{{ route('dashboard') }}?sort=desc" class="inline-flex items-center px-4 py-2 mr-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                        {{ __('Sort desc') }}
+                    </a>
+                @elseif (request()->input('sort') == 'desc' || !request()->has('sort'))
+                    <a href="{{ route('dashboard') }}?sort=asc" class="inline-flex items-center px-4 py-2 mr-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                        {{ __('Sort asc') }}
+                    </a>
+                @endif
             @endif
         </div>
 
