@@ -1,4 +1,4 @@
-## NatureTracker
+## Square1
 
 ### Badges
 
