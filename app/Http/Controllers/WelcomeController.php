@@ -18,7 +18,7 @@ class WelcomeController extends Controller
     {
         $posts = Post::query()
             ->with('user')
-            ->paginate(3);
+            ->paginate(10);
 
         return view('welcome')->with("posts", $posts);
     }

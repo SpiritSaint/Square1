@@ -67,11 +67,13 @@
             </div>
         </div>
 
+        @if($posts->hasPages())
         <div>
             <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg p-6">
                 {{ $posts->links() }}
             </div>
         </div>
+        @endif
     </div>
 </div>
 </body>

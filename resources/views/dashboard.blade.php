@@ -18,5 +18,13 @@
         @foreach($posts as $post)
             @include('posts.each', ["post" => $post])
         @endforeach
+
+        @if($posts->hasPages())
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg p-6">
+                    {{ $posts->links() }}
+                </div>
+            </div>
+        @endif
     </div>
 </x-app-layout>
