@@ -18,6 +18,7 @@ class CreateNewUser implements CreatesNewUsers
      * @param array $input
      * @return User
      * @throws ValidationException
+     * @codeCoverageIgnore
      */
     public function create(array $input)
     {

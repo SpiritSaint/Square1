@@ -11,6 +11,7 @@ class DeleteUser implements DeletesUsers
      *
      * @param  mixed  $user
      * @return void
+     * @codeCoverageIgnore
      */
     public function delete($user)
     {
