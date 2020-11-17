@@ -24,6 +24,8 @@ jobs:
         run: php artisan key:generate
       - name: Migrate databases
         run: php artisan migrate
+      - name: Run seeds
+        run: php artisan db:seed
       - name: Execute tests
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
       - name: Upload report to CodeCov
