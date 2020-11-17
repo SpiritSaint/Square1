@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->job(ExtractFeed::class)->everyMinute();
+         $schedule->job(ExtractFeed::class)->hourly();
     }
 
     /**
