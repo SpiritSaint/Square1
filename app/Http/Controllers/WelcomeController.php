@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,10 @@ class WelcomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return view('welcome');
+        $posts = Post::query()
+            ->with('user')
+            ->paginate(3);
+
+        return view('welcome')->with("posts", $posts);
     }
 }
