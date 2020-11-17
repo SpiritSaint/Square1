@@ -29,7 +29,7 @@ class DashboardController extends Controller
             $query->orderBy('publication_date', 'desc');
         }
 
-        $posts = $query->paginate(15);
+        $posts = $query->simplePaginate(10);
         return view('dashboard')->with('posts', $posts);
     }
 }
