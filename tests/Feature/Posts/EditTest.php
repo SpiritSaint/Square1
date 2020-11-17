@@ -20,13 +20,17 @@ class EditTest extends TestCase
 
         $user = User::factory()->create();
 
+        $user->update([
+            "username" => "admin"
+        ]);
+
         $post = $user->posts()->create([
             "title" => $post->title,
             "description" => $post->description,
             "publication_date" => $post->publication_date,
         ]);
 
-        $response = $this->actingAs(User::factory()->create())->get('/posts/' . $post->id . '/edit');
+        $response = $this->actingAs($user)->get('/posts/' . $post->id . '/edit');
 
         $response->assertStatus(200);
     }

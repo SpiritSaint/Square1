@@ -20,13 +20,17 @@ class DestroyTest extends TestCase
 
         $user = User::factory()->create();
 
+        $user->update([
+            "username" => "admin"
+        ]);
+
         $post = $user->posts()->create([
             "title" => $post->title,
             "description" => $post->description,
             "publication_date" => $post->publication_date,
         ]);
 
-        $response = $this->actingAs(User::factory()->create())->delete('/posts/' . $post->id);
+        $response = $this->actingAs($user)->delete('/posts/' . $post->id);
 
         $response->assertRedirect('dashboard');
     }
