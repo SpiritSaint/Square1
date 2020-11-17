@@ -1,5 +1,31 @@
 ## Square1
 
+### Instructions
+
+1. Clone this repository using ssh or https:
+    - `git clone git@github.com:SpiritSaint/Square1.git`
+    - `git clone https://github.com/SpiritSaint/Square1.git`
+2. Move into code folder and install composer dependencies:
+    - `cd Square1`
+    - `composer install`
+3. Copy the example environment file and execute key generate:
+    - `cp .env.example .env`
+    - `php artisan key:generate`
+4. Update `.env` with your own database settings and run migrations
+    - `nano .env` and change settings:
+        - `DB_DATABASE` using the database name.
+        - `DB_USERNAME` using the mysql user.
+        - `DB_PASSWORD` using the user password. 
+    - Finally, run `php artisan migrate` and `php artisan db:seed` to create `admin` user:
+5. Run schedule worker and serve:
+   - `php artisan serve` and `php artisan schedule:work`.
+6. Wait for `ExtractFeed` job.
+
+#### Default user with privileges
+
+- `username:` admin
+- `password:` password
+
 ### Badges
 
 #### Workflows
