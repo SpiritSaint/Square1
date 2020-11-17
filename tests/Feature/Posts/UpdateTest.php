@@ -20,13 +20,17 @@ class UpdateTest extends TestCase
 
         $user = User::factory()->create();
 
+        $user->update([
+            "username" => "admin"
+        ]);
+
         $post = $user->posts()->create([
             "title" => $post->title,
             "description" => $post->description,
             "publication_date" => $post->publication_date,
         ]);
 
-        $response = $this->actingAs(User::factory()->create())->put('/posts/' . $post->id, [
+        $response = $this->actingAs($user)->put('/posts/' . $post->id, [
             "title" => "New title"
         ]);
 
