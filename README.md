@@ -26,6 +26,30 @@
 - `username:` admin
 - `password:` password
 
+#### Some note for debug
+
+If you want reduce the wait time of `ExtractFeed` job, uncomment the code of `app/Console/Kernel.php`.
+
+From:
+
+```php
+    protected function schedule(Schedule $schedule)
+    {
+         $schedule->job(ExtractFeed::class)->hourly();
+//         $schedule->job(ExtractFeed::class)->everyMinute();
+    }
+```
+
+To:
+
+```php
+    protected function schedule(Schedule $schedule)
+    {
+//         $schedule->job(ExtractFeed::class)->hourly();
+         $schedule->job(ExtractFeed::class)->everyMinute();
+    }
+```
+
 ### Badges
 
 #### Workflows
