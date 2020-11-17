@@ -25,7 +25,7 @@ class ExtractFeed implements ShouldQueue
         $payload = Http::get('https://sq1-api-test.herokuapp.com/posts')->json();
 
         $admin = User::query()
-            ->where("email", "admin@example.com")
+            ->where("username", "admin")
             ->firstOrFail();
 
         collect($payload["data"])->each(function($post) use ($admin) {
