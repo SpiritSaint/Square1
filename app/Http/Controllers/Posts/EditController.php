@@ -12,7 +12,7 @@ class EditController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Post $post
      * @return View
      */
