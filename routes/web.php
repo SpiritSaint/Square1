@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    $posts = \App\Models\Post::query()->paginate(15);
+    return view('dashboard')->with("posts", $posts);
+})->name('dashboard');
