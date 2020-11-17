@@ -65,3 +65,8 @@ To:
 #### CodeCov
 
 [![codecov](https://codecov.io/gh/SpiritSaint/Square1/branch/master/graph/badge.svg)](https://codecov.io/gh/SpiritSaint/Square1)
+
+
+### Contact details
+
+Send me a email iantorres@outlook.com
